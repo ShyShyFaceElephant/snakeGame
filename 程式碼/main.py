@@ -5,6 +5,13 @@ import random
 
 # 初始化Pygame
 pygame.init()
+pygame.mixer.init()
+bgmSound = pygame.mixer.Sound('music/bgm.mp3')
+bgmSound.set_volume(0.6)
+upSound = pygame.mixer.Sound('music/up.mp3')
+downSound = pygame.mixer.Sound('music/down.mp3')
+cardSound = pygame.mixer.Sound('music/card.mp3')
+bgmSound.set_volume(0.7)
 
 # 視窗大小
 WIDTH, HEIGHT = 1200, 650
@@ -83,6 +90,10 @@ class Piece(pygame.sprite.Sprite):
         self.update()
 
     def goto(self, newPos):
+        if self.pos > newPos:
+            downSound.play()
+        elif self.pos < newPos:
+            upSound.play()
         self.animation(newPos, 120)
         self.pos = newPos
         self.update()
@@ -112,7 +123,8 @@ cards = [GameCard(0), GameCard(1), GameCard(2), GameCard(3)]
 
 
 def chooseCard():  # 選擇遊戲卡
-    page = random.randint(100, 160)
+    cardSound.play()
+    page = random.randint(230, 250)
     for i in range(page):
         clock.tick(30)
         # 重新渲染
@@ -136,6 +148,7 @@ all_sprites.add(pieces)
 # 遊戲迴圈
 running = True
 key_pressed = False
+bgmSound.play(-1)
 while running:
     clock.tick(60)  # FPS
     for event in pygame.event.get():
