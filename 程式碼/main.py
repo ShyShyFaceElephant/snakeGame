@@ -1,4 +1,3 @@
-from typing import Any
 import pygame
 import sys
 import random
@@ -7,11 +6,11 @@ import random
 pygame.init()
 pygame.mixer.init()
 bgmSound = pygame.mixer.Sound('music/bgm.mp3')
-bgmSound.set_volume(0.6)
+bgmSound.set_volume(0.5)
 upSound = pygame.mixer.Sound('music/up.mp3')
 downSound = pygame.mixer.Sound('music/down.mp3')
 cardSound = pygame.mixer.Sound('music/card.mp3')
-bgmSound.set_volume(0.7)
+cardSound.set_volume(0.6)
 
 # 視窗大小
 WIDTH, HEIGHT = 1200, 650
@@ -112,26 +111,27 @@ pieces = [Piece(0), Piece(1), Piece(2), Piece(3)]
 class GameCard:
     def __init__(self, team):
         pygame.sprite.Sprite.__init__(self)
-        original_image = pygame.image.load(f"image/g{team+1}.png")
+        original_image = pygame.image.load(f"image/g{team}.png")
         self.image = pygame.transform.scale(original_image, (366, 650))
         self.rect = self.image.get_rect()
         self.team = team
         self.rect.center = WIDTH//2, HEIGHT//2
 
 
-cards = [GameCard(0), GameCard(1), GameCard(2), GameCard(3)]
+cards = [GameCard(0), GameCard(1), GameCard(2), GameCard(
+    3), GameCard(4), GameCard(5), GameCard(6), GameCard(7)]
 
 
 def chooseCard():  # 選擇遊戲卡
     cardSound.play()
-    page = random.randint(230, 250)
+    page = random.randint(230, 237)
     for i in range(page):
         clock.tick(30)
         # 重新渲染
         screen.fill(Background)
         screen.blit(map.image, map.rect.topleft)
         all_sprites.draw(screen)
-        screen.blit(cards[i % 4].image, cards[i % 4].rect.topleft)
+        screen.blit(cards[i % 8].image, cards[i % 8].rect.topleft)
         pygame.display.flip()
     flag = True
     while flag:
