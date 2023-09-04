@@ -30,7 +30,7 @@ star = [2, 4, 8, 13, 15, 17, 21, 25, 29, 32, 35, 41, 45, 47]
 PX = 600/14
 # 建立視窗
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("蛇梯棋")
+pygame.display.set_caption("升天電梯與電鰻")
 clock = pygame.time.Clock()
 pick = 0
 
