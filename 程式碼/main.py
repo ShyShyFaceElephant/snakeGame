@@ -28,7 +28,7 @@ star = [2, 4, 8, 13, 15, 17, 21, 25, 29, 32, 35, 41, 45, 47]
 
 PX = 600/14
 # 建立視窗
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption("升天電梯與電鰻")
 clock = pygame.time.Clock()
 pick = 0
@@ -176,6 +176,11 @@ while running:
                     break
                 elif pieces[pick].pos in star:
                     chooseCard()
+            else:
+                for i in range(1, 7):
+                    if event.key == pygame.key.key_code(chr(i+48)):
+                        pieces[pick].move(i)
+                        break
     pygame.event.clear()
     # 更新遊戲邏輯
     all_sprites.update()
